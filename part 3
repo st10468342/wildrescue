@@ -1,0 +1,240 @@
+/*
+ * Main.java
+ * Wildlife Rescue Operations System
+ */
+
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        Scanner input = new Scanner(System.in);
+        RescueManager manager = new RescueManager();
+
+        int choice;
+
+        do {
+
+            System.out.println("\n=======================================");
+            System.out.println(" WILDLIFE RESCUE OPERATIONS SYSTEM");
+            System.out.println("=======================================");
+            System.out.println("1. Record New Rescue Case");
+            System.out.println("2. Display All Rescue Cases");
+            System.out.println("3. Search Rescue Case");
+            System.out.println("4. Update Rescue Information");
+            System.out.println("5. Delete Rescue Case");
+            System.out.println("6. Monitor Rescue Projects");
+            System.out.println("7. Generate Rescue Report");
+            System.out.println("8. Exit");
+            System.out.println("=======================================");
+            System.out.print("Enter your choice: ");
+
+            choice = input.nextInt();
+            input.nextLine();
+
+            switch (choice) {
+
+                case 1:
+
+                    System.out.print("Case ID: ");
+                    String caseID = input.nextLine();
+
+                    System.out.print("Animal Name: ");
+                    String animal = input.nextLine();
+
+                    System.out.print("Species: ");
+                    String species = input.nextLine();
+
+                    System.out.print("Rescue Location: ");
+                    String location = input.nextLine();
+
+                    System.out.print("Rescue Date: ");
+                    String date = input.nextLine();
+
+                    System.out.print("Rescuer Name: ");
+                    String rescuer = input.nextLine();
+
+                    System.out.print("Injury Description: ");
+                    String injury = input.nextLine();
+
+                    System.out.print("Rescue Status (Pending/In Progress/Completed): ");
+                    String status = input.nextLine();
+
+                    System.out.print("Project Name: ");
+                    String project = input.nextLine();
+
+                    WildlifeRescue rescue = new WildlifeRescue(
+                            caseID,
+                            animal,
+                            species,
+                            location,
+                            date,
+                            rescuer,
+                            injury,
+                            status,
+                            project
+                    );
+
+                    manager.addRescue(rescue);
+
+                    break;
+
+                case 2:
+
+                    manager.displayAllRescues();
+
+                    break;
+
+                case 3:
+
+                    System.out.println("\nSearch By");
+                    System.out.println("1. Case ID");
+                    System.out.println("2. Animal Name");
+                    System.out.print("Choice: ");
+
+                    int searchChoice = input.nextInt();
+                    input.nextLine();
+
+                    WildlifeRescue found = null;
+
+                    if (searchChoice == 1) {
+
+                        System.out.print("Enter Case ID: ");
+                        String id = input.nextLine();
+
+                        found = manager.searchByCaseID(id);
+
+                    } else if (searchChoice == 2) {
+
+                        System.out.print("Enter Animal Name: ");
+                        String name = input.nextLine();
+
+                        found = manager.searchByAnimalName(name);
+                    }
+
+                    if (found != null) {
+
+                        System.out.println("\nRescue Case Found");
+                        found.displayRescue();
+
+                    } else {
+
+                        System.out.println("\nRescue case not found.");
+
+                    }
+
+                    break;
+
+                case 4:
+
+                    System.out.print("Enter Case ID: ");
+                    String updateID = input.nextLine();
+
+                    WildlifeRescue update = manager.searchByCaseID(updateID);
+
+                    if (update == null) {
+
+                        System.out.println("Case not found.");
+
+                    } else {
+
+                        System.out.println("\n1. Update Status");
+                        System.out.println("2. Update Project");
+                        System.out.println("3. Update Location");
+                        System.out.print("Choice: ");
+
+                        int updateChoice = input.nextInt();
+                        input.nextLine();
+
+                        switch (updateChoice) {
+
+                            case 1:
+
+                                System.out.print("New Status: ");
+                                String newStatus = input.nextLine();
+
+                                manager.updateRescueStatus(updateID, newStatus);
+
+                                System.out.println("Status updated.");
+
+                                break;
+
+                            case 2:
+
+                                System.out.print("New Project: ");
+                                String newProject = input.nextLine();
+
+                                manager.updateProject(updateID, newProject);
+
+                                System.out.println("Project updated.");
+
+                                break;
+
+                            case 3:
+
+                                System.out.print("New Location: ");
+                                String newLocation = input.nextLine();
+
+                                manager.updateLocation(updateID, newLocation);
+
+                                System.out.println("Location updated.");
+
+                                break;
+
+                            default:
+
+                                System.out.println("Invalid choice.");
+
+                        }
+
+                    }
+
+                    break;
+
+                case 5:
+
+                    System.out.print("Enter Case ID to delete: ");
+                    String deleteID = input.nextLine();
+
+                    if (manager.deleteRescue(deleteID)) {
+
+                        System.out.println("Rescue case deleted.");
+
+                    } else {
+
+                        System.out.println("Case not found.");
+
+                    }
+
+                    break;
+
+                case 6:
+
+                    manager.monitorProjects();
+
+                    break;
+
+                case 7:
+
+                    manager.generateReport();
+
+                    break;
+
+                case 8:
+
+                    System.out.println("\nThank you for using the Wildlife Rescue Operations System.");
+
+                    break;
+
+                default:
+
+                    System.out.println("Invalid menu option.");
+
+            }
+
+        } while (choice != 8);
+
+        input.close();
+    }
+}
