@@ -1,0 +1,173 @@
+/*
+ * RescueManager.java
+ * Wildlife Rescue Operations System
+ */
+
+import java.util.ArrayList;
+
+public class RescueManager {
+
+    // ArrayList to store rescue cases
+    private ArrayList<WildlifeRescue> rescueList;
+
+    // Constructor
+    public RescueManager() {
+        rescueList = new ArrayList<>();
+    }
+
+    // Add Rescue Case
+    public void addRescue(WildlifeRescue rescue) {
+        rescueList.add(rescue);
+        System.out.println("\nRescue case added successfully.");
+    }
+
+    // Display All Rescue Cases
+    public void displayAllRescues() {
+
+        if (rescueList.isEmpty()) {
+            System.out.println("\nNo rescue cases found.");
+            return;
+        }
+
+        System.out.println("\n========== ALL RESCUE CASES ==========");
+
+        for (WildlifeRescue rescue : rescueList) {
+            rescue.displayRescue();
+        }
+    }
+
+    // Search by Case ID
+    public WildlifeRescue searchByCaseID(String caseID) {
+
+        for (WildlifeRescue rescue : rescueList) {
+
+            if (rescue.getCaseID().equalsIgnoreCase(caseID)) {
+                return rescue;
+            }
+
+        }
+
+        return null;
+    }
+
+    // Search by Animal Name
+    public WildlifeRescue searchByAnimalName(String animalName) {
+
+        for (WildlifeRescue rescue : rescueList) {
+
+            if (rescue.getAnimalName().equalsIgnoreCase(animalName)) {
+                return rescue;
+            }
+
+        }
+
+        return null;
+    }
+
+    // Update Rescue Status
+    public boolean updateRescueStatus(String caseID, String newStatus) {
+
+        WildlifeRescue rescue = searchByCaseID(caseID);
+
+        if (rescue != null) {
+            rescue.setRescueStatus(newStatus);
+            return true;
+        }
+
+        return false;
+    }
+
+    // Update Rescue Project
+    public boolean updateProject(String caseID, String projectName) {
+
+        WildlifeRescue rescue = searchByCaseID(caseID);
+
+        if (rescue != null) {
+            rescue.setProjectName(projectName);
+            return true;
+        }
+
+        return false;
+    }
+
+    // Update Rescue Location
+    public boolean updateLocation(String caseID, String location) {
+
+        WildlifeRescue rescue = searchByCaseID(caseID);
+
+        if (rescue != null) {
+            rescue.setRescueLocation(location);
+            return true;
+        }
+
+        return false;
+    }
+
+    // Delete Rescue Case
+    public boolean deleteRescue(String caseID) {
+
+        WildlifeRescue rescue = searchByCaseID(caseID);
+
+        if (rescue != null) {
+            rescueList.remove(rescue);
+            return true;
+        }
+
+        return false;
+    }
+
+    // Monitor Rescue Projects
+    public void monitorProjects() {
+
+        if (rescueList.isEmpty()) {
+            System.out.println("\nNo rescue projects available.");
+            return;
+        }
+
+        System.out.println("\n========== RESCUE PROJECT MONITOR ==========");
+
+        for (WildlifeRescue rescue : rescueList) {
+
+            System.out.println("-----------------------------------------");
+            System.out.println("Case ID      : " + rescue.getCaseID());
+            System.out.println("Animal       : " + rescue.getAnimalName());
+            System.out.println("Project      : " + rescue.getProjectName());
+            System.out.println("Status       : " + rescue.getRescueStatus());
+        }
+    }
+
+    // Generate Rescue Report
+    public void generateReport() {
+
+        int total = rescueList.size();
+        int pending = 0;
+        int progress = 0;
+        int completed = 0;
+
+        for (WildlifeRescue rescue : rescueList) {
+
+            String status = rescue.getRescueStatus();
+
+            if (status.equalsIgnoreCase("Pending")) {
+                pending++;
+            } else if (status.equalsIgnoreCase("In Progress")) {
+                progress++;
+            } else if (status.equalsIgnoreCase("Completed")) {
+                completed++;
+            }
+
+        }
+
+        System.out.println("\n========== WILDLIFE RESCUE REPORT ==========");
+        System.out.println("Total Rescue Cases : " + total);
+        System.out.println("Pending            : " + pending);
+        System.out.println("In Progress        : " + progress);
+        System.out.println("Completed          : " + completed);
+        System.out.println("============================================");
+    }
+
+    // Get Total Rescue Cases
+    public int getTotalCases() {
+        return rescueList.size();
+    }
+}
