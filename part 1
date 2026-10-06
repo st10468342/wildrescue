@@ -1,0 +1,148 @@
+/*
+ * WildlifeRescue.java
+ * Model class for the Wildlife Rescue Operations System
+ */
+
+public class WildlifeRescue {
+
+    // Attributes
+    private String caseID;
+    private String animalName;
+    private String species;
+    private String rescueLocation;
+    private String rescueDate;
+    private String rescuerName;
+    private String injuryDescription;
+    private String rescueStatus;
+    private String projectName;
+
+    // Default Constructor
+    public WildlifeRescue() {
+
+    }
+
+    // Parameterized Constructor
+    public WildlifeRescue(String caseID, String animalName, String species,
+            String rescueLocation, String rescueDate,
+            String rescuerName, String injuryDescription,
+            String rescueStatus, String projectName) {
+
+        this.caseID = caseID;
+        this.animalName = animalName;
+        this.species = species;
+        this.rescueLocation = rescueLocation;
+        this.rescueDate = rescueDate;
+        this.rescuerName = rescuerName;
+        this.injuryDescription = injuryDescription;
+        this.rescueStatus = rescueStatus;
+        this.projectName = projectName;
+    }
+
+    // Getters
+
+    public String getCaseID() {
+        return caseID;
+    }
+
+    public String getAnimalName() {
+        return animalName;
+    }
+
+    public String getSpecies() {
+        return species;
+    }
+
+    public String getRescueLocation() {
+        return rescueLocation;
+    }
+
+    public String getRescueDate() {
+        return rescueDate;
+    }
+
+    public String getRescuerName() {
+        return rescuerName;
+    }
+
+    public String getInjuryDescription() {
+        return injuryDescription;
+    }
+
+    public String getRescueStatus() {
+        return rescueStatus;
+    }
+
+    public String getProjectName() {
+        return projectName;
+    }
+
+    // Setters
+
+    public void setCaseID(String caseID) {
+        this.caseID = caseID;
+    }
+
+    public void setAnimalName(String animalName) {
+        this.animalName = animalName;
+    }
+
+    public void setSpecies(String species) {
+        this.species = species;
+    }
+
+    public void setRescueLocation(String rescueLocation) {
+        this.rescueLocation = rescueLocation;
+    }
+
+    public void setRescueDate(String rescueDate) {
+        this.rescueDate = rescueDate;
+    }
+
+    public void setRescuerName(String rescuerName) {
+        this.rescuerName = rescuerName;
+    }
+
+    public void setInjuryDescription(String injuryDescription) {
+        this.injuryDescription = injuryDescription;
+    }
+
+    public void setRescueStatus(String rescueStatus) {
+        this.rescueStatus = rescueStatus;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
+
+    // Display Rescue Details
+    public void displayRescue() {
+
+        System.out.println("===========================================");
+        System.out.println("Wildlife Rescue Case Details");
+        System.out.println("===========================================");
+        System.out.println("Case ID            : " + caseID);
+        System.out.println("Animal Name        : " + animalName);
+        System.out.println("Species            : " + species);
+        System.out.println("Rescue Location    : " + rescueLocation);
+        System.out.println("Rescue Date        : " + rescueDate);
+        System.out.println("Rescuer Name       : " + rescuerName);
+        System.out.println("Injury Description : " + injuryDescription);
+        System.out.println("Rescue Status      : " + rescueStatus);
+        System.out.println("Project Name       : " + projectName);
+        System.out.println("===========================================");
+    }
+
+    @Override
+    public String toString() {
+
+        return "Case ID: " + caseID
+                + "\nAnimal Name: " + animalName
+                + "\nSpecies: " + species
+                + "\nLocation: " + rescueLocation
+                + "\nDate: " + rescueDate
+                + "\nRescuer: " + rescuerName
+                + "\nInjury: " + injuryDescription
+                + "\nStatus: " + rescueStatus
+                + "\nProject: " + projectName;
+    }
+}
